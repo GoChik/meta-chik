@@ -1,0 +1,9 @@
+[Unit]
+Description=Chik client application
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/chik-client
+
+[Install]
+WantedBy=multi-user.target
