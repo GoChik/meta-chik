@@ -19,19 +19,19 @@ GO_SYS = "github.com/golang/sys"
 inherit go systemd
 
 SRC_URI = "\
-    git://${GO_CHIK_CLIENT};protocol=https;name=client;destsuffix=${PN}-${PV}/src/${GO_CHIK_CLIENT} \
-    git://${GO_CHIK};protocol=https;name=chik;destsuffix=${PN}-${PV}/src/${GO_CHIK} \
-    git://${GO_CHIK_MODBUS};protocol=https;name=chikmodbus;destsuffix=${PN}-${PV}/src/${GO_CHIK_MODBUS} \
-    git://${GO_PUBSUB};protocol=https;name=pubsub;destsuffix=${PN}-${PV}/src/${GO_PUBSUB} \
-    git://${GO_UUID};protocol=https;name=uuid;destsuffix=${PN}-${PV}/src/${GO_UUID} \
-    git://${GO_MAPSTRUCTURE};protocol=https;name=mapstructure;destsuffix=${PN}-${PV}/src/${GO_MAPSTRUCTURE} \
-    git://${GO_SUNRISE};protocol=https;name=sunrise;destsuffix=${PN}-${PV}/src/${GO_SUNRISE} \
-    git://${GO_ZEROLOG};protocol=https;name=zerolog;destsuffix=${PN}-${PV}/src/${GO_ZEROLOG} \
-    git://${GO_SERIAL};protocol=https;name=serial;destsuffix=${PN}-${PV}/src/${GO_SERIAL} \
-    git://${GO_FUNK};protocol=https;name=funk;destsuffix=${PN}-${PV}/src/${GO_FUNK} \
+    git://${GO_CHIK_CLIENT};protocol=https;name=client;destsuffix=${BPN}-${PV}/src/${GO_CHIK_CLIENT} \
+    git://${GO_CHIK};protocol=https;name=chik;destsuffix=${BPN}-${PV}/src/${GO_CHIK} \
+    git://${GO_CHIK_MODBUS};protocol=https;name=chikmodbus;destsuffix=${BPN}-${PV}/src/${GO_CHIK_MODBUS} \
+    git://${GO_PUBSUB};protocol=https;name=pubsub;destsuffix=${BPN}-${PV}/src/${GO_PUBSUB} \
+    git://${GO_UUID};protocol=https;name=uuid;destsuffix=${BPN}-${PV}/src/${GO_UUID} \
+    git://${GO_MAPSTRUCTURE};protocol=https;name=mapstructure;destsuffix=${BPN}-${PV}/src/${GO_MAPSTRUCTURE} \
+    git://${GO_SUNRISE};protocol=https;name=sunrise;destsuffix=${BPN}-${PV}/src/${GO_SUNRISE} \
+    git://${GO_ZEROLOG};protocol=https;name=zerolog;destsuffix=${BPN}-${PV}/src/${GO_ZEROLOG} \
+    git://${GO_SERIAL};protocol=https;name=serial;destsuffix=${BPN}-${PV}/src/${GO_SERIAL} \
+    git://${GO_FUNK};protocol=https;name=funk;destsuffix=${BPN}-${PV}/src/${GO_FUNK} \
     \
-    git://${GO_SYNC};protocol=https;name=sync;destsuffix=${PN}-${PV}/src/golang.org/x/sync \
-    git://${GO_SYS};protocol=https;name=sys;destsuffix=${PN}-${PV}/src/golang.org/x/sys \
+    git://${GO_SYNC};protocol=https;name=sync;destsuffix=${BPN}-${PV}/src/golang.org/x/sync \
+    git://${GO_SYS};protocol=https;name=sys;destsuffix=${BPN}-${PV}/src/golang.org/x/sys \
     \
     file://client.conf \
     file://chik-client.service \
