@@ -52,6 +52,7 @@ SRCREV_sys = "${AUTOREV}"
 
 GOBUILDFLAGS += "-tags platform_unipi_neuron"
 GO_INSTALL = "${GO_CHIK_CLIENT}"
+GO_LINKSHARED = ""
 
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://src/${GO_CHIK_CLIENT}/LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
@@ -60,6 +61,7 @@ SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "chik-client.service"
 
 do_install_append() {
+    mv ${D}${bindir}/client ${D}${bindir}/chik-client
     install -d ${D}${sysconfdir}/chik
     install -m 0644 ${WORKDIR}/client.conf ${D}${sysconfdir}/chik
     install -d ${D}${systemd_system_unitdir}
