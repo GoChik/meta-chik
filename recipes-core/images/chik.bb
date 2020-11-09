@@ -25,4 +25,5 @@ IMAGE_INSTALL += "\
     openssl \
     systemd-analyze \
     chik-client \
+    snapcast-server \
 "
