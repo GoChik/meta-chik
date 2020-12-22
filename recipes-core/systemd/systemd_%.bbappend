@@ -1,5 +1,5 @@
 # connman will take care of networking and time sync
-PKGCONFIG_remove += " \
+PACKAGECONFIG_remove += " \
     networkd \
     timesyncd \
 "
