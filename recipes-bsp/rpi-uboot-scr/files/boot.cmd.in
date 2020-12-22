@@ -1,0 +1,6 @@
+if env exists rpipart;then echo Booting from mmcblk0p${rpipart};else setenv rpipart 2;echo rpipart not set, default to ${rpipart};fi
+if test ${rpipart} = 2;then setenv bootfiles_variant "";else setenv bootfiles_variant "alt_";fi
+load mmc 0:1 ${kernel_addr_r} ${bootfiles_variant}uImage
+load mmc 0:1 ${fdt_addr_r} ${bootfiles_variant}${fdtfile}
+setenv bootargs root=/dev/mmcblk0p${rpipart} rootfstype=ext4 rootwait
+@@KERNEL_BOOTCMD@@ ${kernel_addr_r} - ${fdt_addr_r}
