@@ -8,10 +8,11 @@ GO_CHIK_MODBUS = "github.com/gochik/modbus"
 GO_PUBSUB = "github.com/cskr/pubsub"
 GO_UUID = "github.com/gofrs/uuid"
 GO_MAPSTRUCTURE = "github.com/mitchellh/mapstructure"
-GO_SUNRISE = "github.com/nathan-osman/go-sunrise"
+GO_SUNRISE = "github.com/gochik/sunrisesunset"
 GO_ZEROLOG = "github.com/rs/zerolog"
 GO_SERIAL = "github.com/tarm/serial"
 GO_FUNK = "github.com/thoas/go-funk"
+GO_GVAL = "github.com/PaesslerAG/gval"
 
 GO_SYNC = "github.com/golang/sync"
 GO_SYS = "github.com/golang/sys"
@@ -29,6 +30,7 @@ SRC_URI = "\
     git://${GO_ZEROLOG};protocol=https;name=zerolog;destsuffix=${BPN}-${PV}/src/${GO_ZEROLOG} \
     git://${GO_SERIAL};protocol=https;name=serial;destsuffix=${BPN}-${PV}/src/${GO_SERIAL} \
     git://${GO_FUNK};protocol=https;name=funk;destsuffix=${BPN}-${PV}/src/${GO_FUNK} \
+    git://${GO_GVAL};protocol=https;name=gval;destsuffix=${BPN}-${PV}/src/${GO_GVAL} \
     \
     git://${GO_SYNC};protocol=https;name=sync;destsuffix=${BPN}-${PV}/src/golang.org/x/sync \
     git://${GO_SYS};protocol=https;name=sys;destsuffix=${BPN}-${PV}/src/golang.org/x/sys \
@@ -47,6 +49,7 @@ SRCREV_sunrise = "${AUTOREV}"
 SRCREV_zerolog = "${AUTOREV}"
 SRCREV_serial = "${AUTOREV}"
 SRCREV_funk = "48b44a2becc3b796369898586ad9b762479ed28f"
+SRCREV_gval = "3022fab6dfe9e0ff4a5df38d3bfe443f1d053616"
 SRCREV_sync = "${AUTOREV}"
 SRCREV_sys = "${AUTOREV}"
 
