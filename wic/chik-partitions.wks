@@ -4,4 +4,5 @@
 
 part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 4096 --size 20
 part / --source rootfs --ondisk mmcblk0 --fstype=ext4  --label root --align 4096
-part /etc --source rootfs --sourceparams="subdir=/etc" --fsoptions="rw,async,noatime" --ondisk mmcblk0 --fstype=ext4 --label conf --align 4096 --size 10M
+part --source rootfs --ondisk mmcblk0 --fstype=ext4  --label root --align 4096
+part /media --ondisk mmcblk0 --fstype=vfat --label data --align 4096 --size 200

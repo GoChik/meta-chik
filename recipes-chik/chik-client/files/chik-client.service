@@ -3,7 +3,7 @@ Description=Chik client application
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/chik-client
+ExecStart=/usr/bin/chik-client -config /media/
 
 [Install]
 WantedBy=multi-user.target
