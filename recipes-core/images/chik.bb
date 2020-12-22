@@ -12,18 +12,22 @@ IMAGE_LINGUAS = ""
 inherit core-image
 
 IMAGE_INSTALL += "\
-    ${CORE_IMAGE_EXTRA_INSTALL} \
-\
-    packagegroup-core-boot \
-    packagegroup-base-extended \
-\
     tzdata \
     avahi-daemon \
     ca-certificates \
     connman \
     connman-client \
     openssl \
-    systemd-analyze \
     chik-client \
     snapcast-server \
+    alsa-utils \
+    swupdate \
+    swupdate-www \
+"
+
+# Development features
+IMAGE_FEATURES += " \
+    debug-tweaks \
+    ssh-server-dropbear \
+    allow-empty-password \
 "
