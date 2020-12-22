@@ -1,0 +1,83 @@
+software =
+{
+	version = "1.2";
+
+	chik = {
+		hardware-compatibility: [ "1.0"];
+		stable = {
+			copy1 : {
+				images: (
+					{
+						filename = "chik-unipi-neuron.ext4.gz";
+						type = "raw";
+						compressed = "zlib";
+						device = "/dev/mmcblk0p2";
+					}
+				);
+				files: (
+					{
+						filename = "uImage";
+						path = "/uImage";
+						device = "/dev/mmcblk0p1";
+						filesystem = "vfat";
+					},
+					{
+						filename = "bcm2710-rpi-3-b.dtb";
+						path = "/bcm2710-rpi-3-b.dtb";
+						device = "/dev/mmcblk0p1";
+						filesystem = "vfat";
+					},
+					{
+						filename = "boot.scr";
+						path = "/boot.scr";
+						device = "/dev/mmcblk0p1";
+						filesystem = "vfat";
+					}
+				);
+				uboot: (
+					{
+						name = "rpipart";
+						value = "2";
+					}
+				);
+
+			};
+			copy2 : {
+				images: (
+					{
+						filename = "chik-unipi-neuron.ext4.gz";
+						type = "raw";
+						compressed = "zlib";
+						device = "/dev/mmcblk0p3";
+					}
+				);
+				files: (
+					{
+						filename = "uImage";
+						path = "/alt_uImage";
+						device = "/dev/mmcblk0p1";
+						filesystem = "vfat";
+					},
+					{
+						filename = "bcm2710-rpi-3-b.dtb";
+						path = "/alt_bcm2710-rpi-3-b.dtb";
+						device = "/dev/mmcblk0p1";
+						filesystem = "vfat";
+					},
+					{
+						filename = "boot.scr";
+						path = "/boot.scr";
+						device = "/dev/mmcblk0p1";
+						filesystem = "vfat";
+					}
+				);
+				uboot: (
+					{
+						name = "rpipart";
+						value = "3";
+					}
+				);
+			};
+		};
+	}
+}
