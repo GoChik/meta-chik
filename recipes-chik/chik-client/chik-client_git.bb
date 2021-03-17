@@ -13,6 +13,8 @@ GO_ZEROLOG = "github.com/rs/zerolog"
 GO_SERIAL = "github.com/tarm/serial"
 GO_FUNK = "github.com/thoas/go-funk"
 GO_GVAL = "github.com/PaesslerAG/gval"
+GO_TELEBOT = "gopkg.in/tucnak/telebot.v2"
+GO_ERRORS = "github.com/pkg/errors"
 
 GO_SYNC = "github.com/golang/sync"
 GO_SYS = "github.com/golang/sys"
@@ -31,6 +33,8 @@ SRC_URI = "\
     git://${GO_SERIAL};protocol=https;name=serial;destsuffix=${BPN}-${PV}/src/${GO_SERIAL} \
     git://${GO_FUNK};protocol=https;name=funk;destsuffix=${BPN}-${PV}/src/${GO_FUNK} \
     git://${GO_GVAL};protocol=https;name=gval;destsuffix=${BPN}-${PV}/src/${GO_GVAL} \
+    git://${GO_TELEBOT};protocol=https;name=telebot;destsuffix=${BPN}-${PV}/src/${GO_TELEBOT} \
+    git://${GO_ERRORS};protocol=https;name=errors;destsuffix=${BPN}-${PV}/src/${GO_ERRORS} \
     \
     git://${GO_SYNC};protocol=https;name=sync;destsuffix=${BPN}-${PV}/src/golang.org/x/sync \
     git://${GO_SYS};protocol=https;name=sys;destsuffix=${BPN}-${PV}/src/golang.org/x/sys \
@@ -38,7 +42,7 @@ SRC_URI = "\
     file://client.conf \
     file://chik-client.service \
 "
-SRCREV_FORMAT = "client_chik_chikmodbus_pubsub_uuid_mapstructure_sunrise_zerolog_sync_serial_funk_sys"
+SRCREV_FORMAT = "client_chik_chikmodbus_pubsub_uuid_mapstructure_sunrise_zerolog_sync_serial_funk_sys_gval_telebot"
 SRCREV_client = "${AUTOREV}"
 SRCREV_chik = "${AUTOREV}"
 SRCREV_chikmodbus = "${AUTOREV}"
@@ -50,6 +54,8 @@ SRCREV_zerolog = "${AUTOREV}"
 SRCREV_serial = "${AUTOREV}"
 SRCREV_funk = "48b44a2becc3b796369898586ad9b762479ed28f"
 SRCREV_gval = "3022fab6dfe9e0ff4a5df38d3bfe443f1d053616"
+SRCREV_telebot = "${AUTOREV}"
+SRCREV_errors = "${AUTOREV}"
 SRCREV_sync = "${AUTOREV}"
 SRCREV_sys = "${AUTOREV}"
 
