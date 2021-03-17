@@ -17,24 +17,26 @@ software =
 				files: (
 					{
 						filename = "uImage";
-						path = "/uImage";
-						device = "/dev/mmcblk0p1";
-						filesystem = "vfat";
+						path = "/boot/uImage";
 					},
 					{
 						filename = "bcm2708-rpi-zero-w-music-rpi-0w_music.dtb";
-						path = "/bcm2835-rpi-zero-w-music.dtb";
-						device = "/dev/mmcblk0p1";
-						filesystem = "vfat";
+						path = "/boot/bcm2835-rpi-zero-w-music.dtb";
+					},
+					{
+						filename = "bcm2708-rpi-zero-w-music-hifiberry-amp2-rpi-0w_music.dtb";
+						path = "/boot/bcm2708-rpi-zero-w-music-hifiberry-amp2.dtb";
 					},
 					{
 						filename = "boot.scr";
-						path = "/boot.scr";
-						device = "/dev/mmcblk0p1";
-						filesystem = "vfat";
+						path = "/boot/boot.scr";
 					}
 				);
 				scripts: (
+					{
+						filename = "check_partitions.sh";
+						type = "preinstall";
+					},
 					{
 						filename = "set_hostname.sh";
 						type = "postinstall";
@@ -61,24 +63,26 @@ software =
 				files: (
 					{
 						filename = "uImage";
-						path = "/alt_uImage";
-						device = "/dev/mmcblk0p1";
-						filesystem = "vfat";
+						path = "/boot/alt_uImage";
 					},
 					{
 						filename = "bcm2708-rpi-zero-w-music-rpi-0w_music.dtb";
-						path = "/alt_bcm2835-rpi-zero-w-music.dtb";
-						device = "/dev/mmcblk0p1";
-						filesystem = "vfat";
+						path = "/boot/alt_bcm2835-rpi-zero-w-music.dtb";
+					},
+					{
+						filename = "bcm2708-rpi-zero-w-music-hifiberry-amp2-rpi-0w_music.dtb";
+						path = "/boot/alt_bcm2708-rpi-zero-w-music-hifiberry-amp2.dtb";
 					},
 					{
 						filename = "boot.scr";
-						path = "/boot.scr";
-						device = "/dev/mmcblk0p1";
-						filesystem = "vfat";
+						path = "/boot/boot.scr";
 					}
 				);
 				scripts: (
+					{
+						filename = "check_partitions.sh";
+						type = "preinstall";
+					},
 					{
 						filename = "set_hostname.sh";
 						type = "postinstall";

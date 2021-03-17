@@ -1,3 +1,4 @@
+if test -e mmc 0:1 /hifiberry_amp2;then setenv fdtfile bcm2708-rpi-zero-w-music-hifiberry-amp2.dtb;fi 
 if env exists rpipart;then echo Booting from mmcblk0p${rpipart};else setenv rpipart 2;echo rpipart not set, default to ${rpipart};fi
 if test ${rpipart} = 2;then setenv bootfiles_variant "";else setenv bootfiles_variant "alt_";fi
 load mmc 0:1 ${kernel_addr_r} ${bootfiles_variant}uImage
