@@ -19,8 +19,11 @@ IMAGE_INSTALL += "\
     connman-client \
     openssl \
     chik-client \
+    \
     snapcast-server \
     alsa-utils \
+    librespot \
+    \
     swupdate \
     swupdate-www \
 "
