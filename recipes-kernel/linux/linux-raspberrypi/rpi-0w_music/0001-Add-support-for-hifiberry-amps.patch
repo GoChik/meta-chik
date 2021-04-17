@@ -373,43 +373,6 @@ index 000000000000..158ff172cecf
 +	i2s-controller = <&i2s>;
 +	status = "okay";
 +};
-diff --git a/arch/arm/boot/dts/bcm2708-rpi.dtsi b/arch/arm/boot/dts/bcm2708-rpi.dtsi
-index ce9795dad99f..73965c2f7d28 100644
---- a/arch/arm/boot/dts/bcm2708-rpi.dtsi
-+++ b/arch/arm/boot/dts/bcm2708-rpi.dtsi
-@@ -73,32 +73,6 @@
- 			status = "disabled";
- 		};
- 	};
--
--	__overrides__ {
--		cache_line_size;
--
--		uart0 = <&uart0>,"status";
--		uart1 = <&uart1>,"status";
--		i2s = <&i2s>,"status";
--		spi = <&spi0>,"status";
--		i2c0 = <&i2c0>,"status";
--		i2c1 = <&i2c1>,"status";
--		i2c2_iknowwhatimdoing = <&i2c2>,"status";
--		i2c0_baudrate = <&i2c0>,"clock-frequency:0";
--		i2c1_baudrate = <&i2c1>,"clock-frequency:0";
--		i2c2_baudrate = <&i2c2>,"clock-frequency:0";
--
--		audio = <&audio>,"status";
--		watchdog = <&watchdog>,"status";
--		random = <&random>,"status";
--		sd_overclock = <&sdhost>,"brcm,overclock-50:0";
--		sd_force_pio = <&sdhost>,"brcm,force-pio?";
--		sd_pio_limit = <&sdhost>,"brcm,pio-limit:0";
--		sd_debug     = <&sdhost>,"brcm,debug";
--		sdio_overclock = <&mmc>,"brcm,overclock-50:0",
--				 <&mmcnr>,"brcm,overclock-50:0";
--		axiperf      = <&axiperf>,"status";
--	};
- };
- 
- &hdmi {
 -- 
 2.17.1
 
