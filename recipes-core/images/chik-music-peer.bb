@@ -19,14 +19,9 @@ IMAGE_INSTALL += " \
     connman-client \
     openssl \
     alsa-utils \
+    alsa-lib \
     snapcast-client \
     swupdate \
     swupdate-www \
-"
-
-# debug tools
-IMAGE_FEATURES += " \
-    debug-tweaks \
-    ssh-server-dropbear \
-    allow-empty-password \
+    swupdate-sysrestart \
 "
