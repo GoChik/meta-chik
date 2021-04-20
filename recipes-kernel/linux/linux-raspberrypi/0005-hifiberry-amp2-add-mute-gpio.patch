@@ -1,0 +1,147 @@
+From fa87ad2815cbf8ed3b7855c0d18de332f5607f76 Mon Sep 17 00:00:00 2001
+From: Riccardo Ferrazzo <f.riccardo87@gmail.com>
+Date: Tue, 20 Apr 2021 14:38:11 +0000
+Subject: [PATCH] hifiberry-amp2: add mute gpio
+
+---
+ ...cm2708-rpi-zero-w-music-hifiberry-amp2.dts |  1 +
+ sound/soc/bcm/hifiberry_dacplus.c             | 70 +++++++++++++++++++
+ 2 files changed, 71 insertions(+)
+
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-zero-w-music-hifiberry-amp2.dts b/arch/arm/boot/dts/bcm2708-rpi-zero-w-music-hifiberry-amp2.dts
+index 83a361ac0162..e3929d06333f 100644
+--- a/arch/arm/boot/dts/bcm2708-rpi-zero-w-music-hifiberry-amp2.dts
++++ b/arch/arm/boot/dts/bcm2708-rpi-zero-w-music-hifiberry-amp2.dts
+@@ -183,5 +183,6 @@
+ 	compatible = "hifiberry,hifiberry-dacplus";
+ 	i2s-controller = <&i2s>;
+ 	status = "okay";
++	mute-gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
+ 	leds-off;
+ };
+diff --git a/sound/soc/bcm/hifiberry_dacplus.c b/sound/soc/bcm/hifiberry_dacplus.c
+index 2f1b1ef4191a..c2dc57c15cf5 100644
+--- a/sound/soc/bcm/hifiberry_dacplus.c
++++ b/sound/soc/bcm/hifiberry_dacplus.c
+@@ -26,6 +26,7 @@
+ #include <linux/slab.h>
+ #include <linux/delay.h>
+ #include <linux/i2c.h>
++#include <linux/gpio/consumer.h>
+ 
+ #include <sound/core.h>
+ #include <sound/pcm.h>
+@@ -53,6 +54,7 @@ static bool slave;
+ static bool snd_rpi_hifiberry_is_dacpro;
+ static bool digital_gain_0db_limit = true;
+ static bool leds_off;
++static struct gpio_desc *mute_gpio;
+ 
+ static void snd_rpi_hifiberry_dacplus_select_clk(struct snd_soc_component *component,
+ 	int clk_id)
+@@ -248,11 +250,58 @@ static int snd_rpi_hifiberry_dacplus_hw_params(
+ 	return ret;
+ }
+ 
++static void snd_rpi_hifiberry_dacplus_gpio_mute(struct snd_soc_card *card)
++{
++	if (mute_gpio)
++		gpiod_set_value_cansleep(mute_gpio, 1);
++}
++
++static void snd_rpi_hifiberry_dacplus_gpio_unmute(struct snd_soc_card *card)
++{
++	if (mute_gpio)
++		gpiod_set_value_cansleep(mute_gpio, 0);
++}
++
++static int snd_rpi_hifiberry_dacplus_set_bias_level(struct snd_soc_card *card,
++	struct snd_soc_dapm_context *dapm, enum snd_soc_bias_level level)
++{
++	struct snd_soc_pcm_runtime *rtd;
++	struct snd_soc_dai *codec_dai;
++
++	rtd = snd_soc_get_pcm_runtime(card, card->dai_link[0].name);
++	codec_dai = rtd->codec_dai;
++
++	if (dapm->dev != codec_dai->dev)
++		return 0;
++
++	switch (level) {
++	case SND_SOC_BIAS_PREPARE:
++		if (dapm->bias_level != SND_SOC_BIAS_STANDBY)
++			break;
++		snd_rpi_hifiberry_dacplus_gpio_unmute(card);
++		break;
++
++	case SND_SOC_BIAS_STANDBY:
++		if (dapm->bias_level != SND_SOC_BIAS_PREPARE)
++			break;
++		snd_rpi_hifiberry_dacplus_gpio_mute(card);
++		break;
++
++	default:
++		break;
++	}
++
++	return 0;
++}
++
+ static int snd_rpi_hifiberry_dacplus_startup(
+ 	struct snd_pcm_substream *substream)
+ {
+ 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+ 	struct snd_soc_component *component = rtd->codec_dai->component;
++	struct snd_soc_card *card = rtd->card;
++
++	snd_rpi_hifiberry_dacplus_gpio_mute(card);
+ 
+ 	if (leds_off)
+ 		return 0;
+@@ -269,11 +318,22 @@ static void snd_rpi_hifiberry_dacplus_shutdown(
+ 	snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1, 0x08, 0x00);
+ }
+ 
++static int snd_rpi_hifiberry_dacplus_prepare(
++	struct snd_pcm_substream *substream)
++{
++	struct snd_soc_pcm_runtime *rtd = substream->private_data;
++	struct snd_soc_card *card = rtd->card;
++
++	snd_rpi_hifiberry_dacplus_gpio_unmute(card);
++	return 0;
++}
++
+ /* machine stream operations */
+ static struct snd_soc_ops snd_rpi_hifiberry_dacplus_ops = {
+ 	.hw_params = snd_rpi_hifiberry_dacplus_hw_params,
+ 	.startup = snd_rpi_hifiberry_dacplus_startup,
+ 	.shutdown = snd_rpi_hifiberry_dacplus_shutdown,
++	.prepare = snd_rpi_hifiberry_dacplus_prepare,
+ };
+ 
+ SND_SOC_DAILINK_DEFS(rpi_hifiberry_dacplus,
+@@ -309,6 +369,7 @@ static struct snd_soc_card snd_rpi_hifiberry_dacplus = {
+ 	.owner        = THIS_MODULE,
+ 	.dai_link     = snd_rpi_hifiberry_dacplus_dai,
+ 	.num_links    = ARRAY_SIZE(snd_rpi_hifiberry_dacplus_dai),
++	.set_bias_level = snd_rpi_hifiberry_dacplus_set_bias_level,
+ };
+ 
+ static int hb_hp_detect(void)
+@@ -396,6 +457,15 @@ static int snd_rpi_hifiberry_dacplus_probe(struct platform_device *pdev)
+ 						"hifiberry-dacplus,slave");
+ 		leds_off = of_property_read_bool(pdev->dev.of_node,
+ 						"hifiberry-dacplus,leds_off");
++		mute_gpio = devm_gpiod_get(&pdev->dev, "mute",
++							GPIOD_OUT_LOW);
++
++		if (IS_ERR(mute_gpio)) {
++			ret = PTR_ERR(mute_gpio);
++			dev_err(&pdev->dev,
++				"failed to get mute gpio: %d\n", ret);
++			return ret;
++		}
+ 	}
+ 
+ 	ret = devm_snd_soc_register_card(&pdev->dev,
