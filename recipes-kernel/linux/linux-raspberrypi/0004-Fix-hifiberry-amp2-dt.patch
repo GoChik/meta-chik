@@ -1,0 +1,41 @@
+From 026262dffbe71297c4615733f02a38380d5f0a30 Mon Sep 17 00:00:00 2001
+From: Riccardo Ferrazzo <f.riccardo87@gmail.com>
+Date: Tue, 20 Apr 2021 14:37:44 +0000
+Subject: [PATCH] Fix hifiberry-amp2 dt
+
+---
+ .../bcm2708-rpi-zero-w-music-hifiberry-amp2.dts    | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-zero-w-music-hifiberry-amp2.dts b/arch/arm/boot/dts/bcm2708-rpi-zero-w-music-hifiberry-amp2.dts
+index 16826f7fb069..83a361ac0162 100644
+--- a/arch/arm/boot/dts/bcm2708-rpi-zero-w-music-hifiberry-amp2.dts
++++ b/arch/arm/boot/dts/bcm2708-rpi-zero-w-music-hifiberry-amp2.dts
+@@ -18,11 +18,9 @@
+ 		mmc1 = &mmcnr;
+ 	};
+ 
+-	clocks {
+-		dacpro_osc: dacpro_osc {
+-			compatible = "hifiberry,dacpro-clk";
+-			#clock-cells = <0>;
+-		};
++	dacpro_osc: dacpro_osc {
++		compatible = "hifiberry,dacpro-clk";
++		#clock-cells = <0>;
+ 	};
+ };
+ 
+@@ -147,6 +145,12 @@
+ 		CPVDD-supply = <&vdd_3v3_reg>;
+ 		status = "okay";
+ 	};
++
++	hpamp: hpamp@60 {
++		compatible = "ti,tpa6130a2";
++		reg = <0x60>;
++		status = "disabled";
++	};
+ };
+ 
+ &i2c2 {
