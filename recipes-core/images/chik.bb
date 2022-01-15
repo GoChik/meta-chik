@@ -23,6 +23,7 @@ IMAGE_INSTALL += "\
     snapcast-server \
     alsa-utils \
     librespot \
+    shairport-sync \
     \
     swupdate \
     swupdate-www \
