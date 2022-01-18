@@ -6,7 +6,6 @@ inherit gobin systemd
 
 SRC_URI = "\
     git://github.com/gochik/client;protocol=https \
-    file://client.conf \
     file://chik-client.service \
 "
 SRCREV = "${AUTOREV}"
@@ -24,13 +23,10 @@ SYSTEMD_SERVICE_${PN} = "chik-client.service"
 do_install_append() {
     install -d ${D}${bindir}
     install -m 0755 ${S}/client ${D}${bindir}/chik-client
-    install -d ${D}${sysconfdir}/chik
-    install -m 0644 ${WORKDIR}/client.conf ${D}${sysconfdir}/chik
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/chik-client.service ${D}${systemd_system_unitdir}
 }
 
 FILES_${PN} += " \
-    ${sysconfdir}/chik/client.conf \
     ${systemd_system_unitdir}/chik-client.service \
 "
