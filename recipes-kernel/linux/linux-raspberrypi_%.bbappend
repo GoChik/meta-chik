@@ -17,4 +17,6 @@ SRC_URI_append_unipi-neuron = " \
     file://0003-add-neuron-devicetree.patch \
 "
 
+KBUILD_DEFCONFIG_unipi-neuron = ""
+
 #CMDLINE = "console=/dev/ttyAMA0,115200 kgdboc=ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait"

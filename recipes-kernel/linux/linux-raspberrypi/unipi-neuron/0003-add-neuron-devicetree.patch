@@ -1,4 +1,4 @@
-From bc0d22a3a1e0af19e479f044e589bc6971ec7ed4 Mon Sep 17 00:00:00 2001
+From 4df8b0365ac4b65c79668ed78e826e1f55fd167c Mon Sep 17 00:00:00 2001
 From: Riccardo Ferrazzo <f.riccardo87@gmail.com>
 Date: Sat, 1 Jan 2022 15:37:20 +0000
 Subject: [PATCH] add neuron devicetree
@@ -10,7 +10,7 @@ Subject: [PATCH] add neuron devicetree
 
 diff --git a/arch/arm/boot/dts/bcm2710-rpi-3-b-neuron.dts b/arch/arm/boot/dts/bcm2710-rpi-3-b-neuron.dts
 new file mode 100644
-index 000000000000..a2c0837c56ca
+index 000000000000..65aeadb9e530
 --- /dev/null
 +++ b/arch/arm/boot/dts/bcm2710-rpi-3-b-neuron.dts
 @@ -0,0 +1,288 @@
@@ -174,7 +174,7 @@ index 000000000000..a2c0837c56ca
 +	};
 +
 +	neuronspi0: neuronspi@0 {
-+		compatible = "unipispi";
++		compatible = "unipi,neuron";
 +		reg = <1>;
 +		#address-cells = <1>;
 +		#size-cells = <0>;
@@ -190,7 +190,7 @@ index 000000000000..a2c0837c56ca
 +	};
 +
 +	neuronspi1: neuronspi@1 {
-+		compatible = "unipispi";
++		compatible = "unipi,neuron";
 +		reg = <2>;
 +		#address-cells = <1>;
 +		#size-cells = <0>;
@@ -206,7 +206,7 @@ index 000000000000..a2c0837c56ca
 +	};
 +
 +	neuronspi2: neuronspi@2 {
-+		compatible = "unipispi";
++		compatible = "unipi,neuron";
 +		reg = <3>;
 +		#address-cells = <1>;
 +		#size-cells = <0>;
