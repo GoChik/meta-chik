@@ -1,5 +1,9 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
+# KCONFIG_MODE = "--allnoconfig"
+# KBUILD_DEFCONFIG_raspberrypi = ""
+# KBUILD_DEFCONFIG_raspberrypi3 = ""
+
 SRC_URI_append = " \
     file://defconfig \
 "
@@ -16,7 +20,5 @@ SRC_URI_append_unipi-neuron = " \
     file://0002-unipi-add-rtc-driver.patch \
     file://0003-add-neuron-devicetree.patch \
 "
-
-KBUILD_DEFCONFIG_unipi-neuron = ""
 
 #CMDLINE = "console=/dev/ttyAMA0,115200 kgdboc=ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait"
