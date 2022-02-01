@@ -24,4 +24,5 @@ IMAGE_INSTALL += " \
     swupdate \
     swupdate-www \
     swupdate-sysrestart \
+    shairport-sync \
 "
