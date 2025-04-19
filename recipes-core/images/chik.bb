@@ -12,21 +12,24 @@ IMAGE_LINGUAS = ""
 inherit core-image
 
 IMAGE_INSTALL += "\
+    unipi-overlays \
     tzdata \
     avahi-daemon \
     ca-certificates \
     connman \
     connman-client \
+    wireless-regdb-static \
+    bluez5 \
     openssl \
     chik-client \
     \
     snapcast-server \
-    alsa-utils \
-    librespot \
     shairport-sync \
-    \
-    swupdate \
-    swupdate-www \
+"
+
+IMAGE_BOOT_FILES += " \
+    devicetree/unipi_s103-overlay.dtbo;overlays/unipi_s103-overlay.dtbo \
+    devicetree/unipi_l203-overlay.dtbo;overlays/unipi_l203-overlay.dtbo \
 "
 
 # Development features

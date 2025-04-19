@@ -1,9 +1,0 @@
-[Unit]
-Description=swupdate sysrestart service
-After=swupdate.service
-
-[Service]
-ExecStart=/usr/bin/swupdate-sysrestart -w
-
-[Install]
-WantedBy=swupdate.service

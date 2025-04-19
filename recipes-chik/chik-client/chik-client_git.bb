@@ -5,7 +5,7 @@ SECTION = "applications"
 inherit gobin systemd
 
 SRC_URI = "\
-    git://github.com/gochik/client;protocol=https \
+    git://github.com/gochik/client;protocol=https;branch=feature/peer \
     file://chik-client.service \
 "
 SRCREV = "${AUTOREV}"
@@ -18,15 +18,15 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE_${PN} = "chik-client.service"
+SYSTEMD_SERVICE:${PN} = "chik-client.service"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${bindir}
     install -m 0755 ${S}/client ${D}${bindir}/chik-client
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/chik-client.service ${D}${systemd_system_unitdir}
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${systemd_system_unitdir}/chik-client.service \
 "
